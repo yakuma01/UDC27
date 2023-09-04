@@ -14,5 +14,23 @@ namespace Utility
             }
             
         }
+
+        public Vector3 GetRayCastPoint(Vector3 nullCheck)
+        {
+            Vector3 mousePosition = Input.mousePosition;
+
+            // Create a ray from the camera to the mouse click position
+            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+
+            // Perform a raycast on the plane
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                var hitpos = hit.point;
+                return hitpos;
+            }
+
+            return nullCheck;
+        }
     }
 }
