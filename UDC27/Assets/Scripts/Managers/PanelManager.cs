@@ -1,6 +1,10 @@
 ﻿
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Pool;
+using static UnityEditor.Progress;
 
 public class PanelManager : Singleton<PanelManager>
 {
@@ -8,8 +12,6 @@ public class PanelManager : Singleton<PanelManager>
     /// This is going to hold all of our instances
     /// </summary>
     private List<PanelInstanceModel> _panelInstanceModels = new List<PanelInstanceModel>();
-
-    public List<PanelInstanceModel> _panelModels;
 
     /// <summary>
     /// Pool of panels
@@ -20,6 +22,8 @@ public class PanelManager : Singleton<PanelManager>
     {
         // Cache the ObjectPool
         _objectPool = ObjectPool.Instance;
+        ShowPanel("GamePanel", PanelShowBehaviour.KEEP_PREVIOUS);
+        ShowPanel("SettingsPanel", PanelShowBehaviour.KEEP_PREVIOUS);
     }
 
     public void ShowPanel(string panelId, PanelShowBehaviour behaviour = PanelShowBehaviour.KEEP_PREVIOUS)
@@ -35,11 +39,11 @@ public class PanelManager : Singleton<PanelManager>
             {
                 // Get the last panel
                 var lastPanel = GetLastPanel();
-                
+
                 // Disable it
                 lastPanel?.PanelInstance.SetActive(false);
             }
-            
+
             // Add this new panel to the queue
             _panelInstanceModels.Add(new PanelInstanceModel
             {
@@ -63,52 +67,30 @@ public class PanelManager : Singleton<PanelManager>
 
             // Remove it from the list of instances
             _panelInstanceModels.Remove(lastPanel);
-            
+
             // Pool the object
             _objectPool.PoolObject(lastPanel.PanelInstance);
 
             // If we have more panels in the queue
-           if (GetAmountPanelsInQueue() > 0)
-           {
-               lastPanel = GetLastPanel();
-               if (lastPanel != null && !lastPanel.PanelInstance.activeInHierarchy)
-               {
-                   lastPanel.PanelInstance.SetActive(true);
-               }
-           }
-        }
-    }
-
-    public void HideMainPanel()
-    {
-        foreach(PanelInstanceModel panelInstance in _panelModels)
-        {
-            if (panelInstance.PanelInstance.activeSelf)
+            if (GetAmountPanelsInQueue() > 0)
             {
-                panelInstance.PanelInstance.SetActive(false);
+                lastPanel = GetLastPanel();
+                if (lastPanel != null && !lastPanel.PanelInstance.activeInHierarchy)
+                {
+                    lastPanel.PanelInstance.SetActive(true);
+                }
             }
         }
     }
 
-    public void HideGamePanel()
+    public void HidePanel(string panelId)
     {
-        foreach (PanelInstanceModel panelInstance in _panelModels)
+        if (IsPanelShowing(panelId))
         {
-            if (panelInstance.PanelInstance.activeSelf && panelInstance.PanelId.Equals("GamePanel"))
-            {
-                panelInstance.PanelInstance.SetActive(false);
-            }
-        }
-    }
-
-    public void ShowMainPanel()
-    {
-        foreach (PanelInstanceModel panelInstance in _panelModels)
-        {
-            if (!panelInstance.PanelInstance.activeSelf)
-            {
-                panelInstance.PanelInstance.SetActive(true);
-            }
+            int index = _panelInstanceModels.FindIndex(i => i.PanelId == panelId);
+            var panel = GetPanel(index);
+            _panelInstanceModels.Remove(panel);
+            _objectPool.PoolObject(panel.PanelInstance);
         }
     }
 
@@ -121,6 +103,10 @@ public class PanelManager : Singleton<PanelManager>
         return _panelInstanceModels[_panelInstanceModels.Count - 1];
     }
 
+    PanelInstanceModel GetPanel(int index)
+    {
+        return _panelInstanceModels[index];
+    }
 
     /// <summary>
     /// Returns if any panel is showing
@@ -131,6 +117,10 @@ public class PanelManager : Singleton<PanelManager>
         return GetAmountPanelsInQueue() > 0;
     }
 
+    public bool IsPanelShowing(string panelId)
+    {
+        return _panelInstanceModels.Any(i => i.PanelId == panelId);
+    }
     /// <summary>
     /// Returns how many panels we have in queue
     /// </summary>

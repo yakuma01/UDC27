@@ -406,7 +406,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8684482539352914141}
         m_TargetAssemblyTypeName: HidePanelButton, Assembly-CSharp
-        m_MethodName: DoHidePanel
+        m_MethodName: DoHidePanelFromStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

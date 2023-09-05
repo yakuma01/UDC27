@@ -19,11 +19,11 @@ public class HidePanelButton : MonoBehaviour
     {
         // Hide the last panel
         _panelManager.HideLastPanel();
-        _panelManager.ShowMainPanel();
     }
 
-    public void DoHideMainPanel()
+    public void DoHidePanelFromStart()
     {
-        _panelManager.HideMainPanel();
+        _panelManager.HidePanel("GamePanel");
+        _panelManager.ShowPanel("TimerPanel");
     }
 }

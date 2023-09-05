@@ -39,7 +39,7 @@ public class ObjectPool : Singleton<ObjectPool>
       if (prefab != null)
       {
          // Create a new instance
-         var newInstace = Instantiate(prefab, Vector3.zero, Quaternion.identity, transform);
+         var newInstace = Instantiate(prefab, Vector3.zero, Quaternion.identity, transform.parent);
          
          // Make sure you set it's name (so you remove the Clone that Unity ads)
          newInstace.name = objectName;

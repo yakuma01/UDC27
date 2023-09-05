@@ -22,18 +22,9 @@ public class ShowPanelButton : MonoBehaviour
         // Cache the manager
         _panelManager = PanelManager.Instance;
     }
-
     public void DoShowPanel()
     {
         // Show the panel
         _panelManager.ShowPanel(PanelId, Behaviour);
-        if (!PanelId.Equals("SettingsOptionsPanel"))
-        {
-            _panelManager.HideGamePanel();
-        }
-        else
-        {
-            _panelManager.HideMainPanel();
-        }
     }
 }

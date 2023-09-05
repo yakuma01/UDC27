@@ -4,6 +4,7 @@ namespace Utility
 {
     public class RayCaster : MonoBehaviour
     {
+        [SerializeField] private LayerMask UIlayerMask = new LayerMask();
         void FixedUpdate()
         {
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
@@ -24,7 +25,7 @@ namespace Utility
 
             // Perform a raycast on the plane
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, UIlayerMask))
             {
                 var hitpos = hit.point;
                 return hitpos;
