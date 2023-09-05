@@ -33,7 +33,7 @@ namespace Player
                     Vector2 Point_2 = new Vector2(hitpos.x,hitpos.z);
                     float mappedAngle = Mathf.Atan2(Point_2.y - Point_1.y , Point_2.x-Point_1.x) * Mathf.Rad2Deg;
                     var rotationVector = new Vector3(90, 0, mappedAngle);
-                    tongue.transform.rotation = Quaternion.Euler(rotationVector);
+                    tongue.transform.rotation = Quaternion.Euler(rotationVector); 
                     
                 }
                 

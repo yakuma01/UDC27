@@ -17,6 +17,8 @@ namespace Enemy
         [SerializeField]private BeeMotion _currentMotion;
 
         private Vector3 _initialPosition;
+
+        private float _attackRange = 10f;
         
         private enum BeeMotion
         {
@@ -41,6 +43,7 @@ namespace Enemy
 
         private void Update()
         {
+            CheckForPlayer();
 
             switch (_currentMotion)
             {
@@ -51,6 +54,7 @@ namespace Enemy
                     FollowBee();
                     break;
                 case BeeMotion.Protect:
+                    ProtectBee();
                     break;
                 case BeeMotion.Attack:
                     AttackBee();
@@ -89,8 +93,19 @@ namespace Enemy
             _agent.speed = 3.2f;
             _agent.acceleration = 8f;
             _agent.transform.rotation = _initialRotation;
-            _agent.SetDestination(queenBee.transform.position);
+            _agent.SetDestination(queenBee.transform.position); 
         }
         
+        private void CheckForPlayer()
+        {
+            if (Vector3.Distance(target.transform.position, transform.position) < _attackRange)
+            {
+                _currentMotion = BeeMotion.Attack;
+            }
+            else
+            {
+                _currentMotion = BeeMotion.Idle;
+            }
+        }
     }
 }

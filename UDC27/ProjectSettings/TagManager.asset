@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Node
   - Ground
+  - Bees
   layers:
   - Default
   - TransparentFX
