@@ -4,7 +4,7 @@ namespace Utility
 {
     public class RayCaster : MonoBehaviour
     {
-        [SerializeField] private LayerMask UIlayerMask = new LayerMask();
+        [SerializeField] private LayerMask UIlayerMask;
         void FixedUpdate()
         {
             Vector3 fwd = transform.TransformDirection(Vector3.forward);

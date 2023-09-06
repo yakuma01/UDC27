@@ -10,8 +10,16 @@ namespace Player
         {
             if (other.CompareTag("Bees"))
             {
-                Debug.Log("calling for: " + other.name);
-                other.GetComponent<CommonBee>().HitBee();
+                var commonBee = other.GetComponent<CommonBee>();
+                var queenBee = other.GetComponent<QueenBee>();
+                if (commonBee != null)
+                {
+                    commonBee.HitBee();
+                }
+                else if (queenBee != null)
+                {
+                    queenBee.HitBee();
+                }
             }
         }
         

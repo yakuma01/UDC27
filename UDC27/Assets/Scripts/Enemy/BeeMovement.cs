@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,7 +19,8 @@ namespace Enemy
 
         private Vector3 _initialPosition;
 
-        private float _attackRange = 10f;
+        private float _followRange = 5f;
+        private float _attackRange = 3f;
         
         private enum BeeMotion
         {
@@ -37,7 +39,8 @@ namespace Enemy
             _initialPosition = _agent.transform.position;
             
             _currentMotion = BeeMotion.Idle;
-            
+            StartCoroutine(IdleBeeMovement());
+
 
         }
 
@@ -69,7 +72,7 @@ namespace Enemy
             _agent.speed = 3.5f;
             _agent.acceleration = 8f;
             _agent.transform.rotation = _initialRotation;
-            _agent.SetDestination(_initialPosition);
+            //_agent.SetDestination(_initialPosition);
         }
         
         private void FollowBee()
@@ -82,10 +85,11 @@ namespace Enemy
         
         private void AttackBee()
         {
-            _agent.speed = 10f;
-            _agent.acceleration = 20f;
+            _agent.speed = 3f;
+            _agent.acceleration = 8f;
             _agent.transform.rotation = _initialRotation;
-            _agent.SetDestination(target.transform.position);
+            //_agent.SetDestination(target.transform.position);
+            _agent.SetDestination(_agent.transform.position);
         }
         
         private void ProtectBee()
@@ -98,14 +102,147 @@ namespace Enemy
         
         private void CheckForPlayer()
         {
-            if (Vector3.Distance(target.transform.position, transform.position) < _attackRange)
+            var dist = Vector3.Distance(target.transform.position, transform.position);
+            // 
+            if (dist < _followRange)
             {
-                _currentMotion = BeeMotion.Attack;
+                if (dist < _attackRange)
+                {
+                    switch (_currentMotion)
+                    {
+                        case BeeMotion.Idle:
+                        case BeeMotion.Protect:
+                        case BeeMotion.Follow:
+                            StartCoroutine(HandleCriticalTime(1));
+                            _currentMotion = BeeMotion.Attack;
+                            break;
+                        case BeeMotion.Attack:
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (_currentMotion)
+                    {
+                        case BeeMotion.Idle:
+                        case BeeMotion.Protect:
+                        case BeeMotion.Attack:
+                            _currentMotion = BeeMotion.Follow;
+                            break;
+                        case BeeMotion.Follow:
+                            break;
+                        
+                    }
+                }
+                
             }
             else
             {
-                _currentMotion = BeeMotion.Idle;
+                if (_currentMotion != BeeMotion.Idle)
+                {
+                    _currentMotion = BeeMotion.Idle;
+                    StartCoroutine(IdleBeeMovement());
+
+                }
+                
             }
+        }
+
+        private IEnumerator IdleBeeMovement()
+        {
+            Vector3 below = transform.position + transform.up;
+            Vector3 above = transform.position - transform.up;
+            Vector3 right = transform.position - transform.right;
+            Vector3 left = transform.position + transform.right;
+
+            _agent.SetDestination(above);
+
+            var time = 1f;
+            yield return new WaitForSeconds(time);
+            
+            _agent.SetDestination(right);
+
+            yield return new WaitForSeconds(time);
+            
+            _agent.SetDestination(below);
+
+            yield return new WaitForSeconds(time);
+            
+            _agent.SetDestination(left);
+
+            yield return new WaitForSeconds(time);
+
+            StartCoroutine(IdleBeeMovement());
+        }
+
+        private IEnumerator HandleCriticalTime2(float time)
+        {
+            var halftime = time / 2f;
+
+            var criticalTime = 1f;
+            var criticalTimeStart = halftime - criticalTime/2;
+            yield return new WaitForSeconds(criticalTimeStart);
+            
+            var common = _agent.GetComponent<CommonBee>();
+            var queen = _agent.GetComponent<QueenBee>();
+            
+            if (common != null)
+            {
+                common.EnableCriticalStage();
+            }
+            else if (queen != null)
+            {
+                queen.EnableCriticalStage();
+            }
+            
+            yield return new WaitForSeconds(criticalTime);
+            
+            if (common != null)
+            {
+                common.DisableCriticalStage();
+            }
+            else if (queen != null)
+            {
+                queen.DisableCriticalStage();
+            }
+
+            var remainingTime = time - criticalTimeStart - criticalTime;
+            
+            yield return new WaitForSeconds(remainingTime);
+
+            Debug.Log("completed");
+
+
+        }
+        
+        private IEnumerator HandleCriticalTime(float time)
+        {
+            
+            //yield return new WaitForSeconds(1);
+            
+            var common = _agent.GetComponent<CommonBee>();
+            var queen = _agent.GetComponent<QueenBee>();
+            
+            if (common != null)
+            {
+                common.EnableCriticalStage();
+            }
+            else if (queen != null)
+            {
+                queen.EnableCriticalStage();
+            }
+            
+            yield return new WaitForSeconds(time);
+            
+            if (common != null)
+            {
+                common.DisableCriticalStage();
+            }
+            else if (queen != null)
+            {
+                queen.DisableCriticalStage();
+            }
+
         }
     }
 }

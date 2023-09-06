@@ -8,6 +8,8 @@ namespace Enemy
         private NavMeshAgent _agent;
 
         private int _hitPoint = 6;
+
+        private bool _inCriticalStage = false;
         // Start is called before the first frame update
         void Start()
         {
@@ -20,12 +22,30 @@ namespace Enemy
 
         public void HitBee()
         {
+            if (IsCritical())
+            {
+                OneHitBee();
+            }
             _hitPoint--;
         }
 
-        public void OneHitBee()
+        private void OneHitBee()
         {
             _hitPoint = 0;
+        }
+
+        public void EnableCriticalStage()
+        {
+            _inCriticalStage = true;
+        }
+        public void DisableCriticalStage()
+        {
+            _inCriticalStage = false;
+        }
+        
+        public bool IsCritical()
+        {
+            return _inCriticalStage;
         }
 
         // Update is called once per frame

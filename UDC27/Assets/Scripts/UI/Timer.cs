@@ -6,7 +6,7 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public float timeLeft = 60.0f;
+    private float timeLeft = 10.0f;
     public TextMeshProUGUI startText; // used for showing countdown from 3, 2, 1 
 
 
@@ -14,5 +14,9 @@ public class Timer : MonoBehaviour
     {
         timeLeft -= Time.deltaTime;
         startText.text = (timeLeft).ToString("0");
+        if (timeLeft <= 0)
+        {
+            Debug.Log("Time is over");  
+        }
     }
 }
