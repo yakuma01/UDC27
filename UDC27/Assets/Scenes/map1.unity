@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 32411585}
   - component: {fileID: 32411586}
   - component: {fileID: 32411588}
+  - component: {fileID: 32411589}
   m_Layer: 0
   m_Name: Frog
   m_TagString: Player
@@ -152,8 +153,8 @@ Transform:
   m_GameObject: {fileID: 32411582}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -9.31, y: 0.03, z: -21}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.4, y: 0, z: -26.1}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1846110249}
@@ -200,7 +201,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c9cb6713601741b4a8606b0161ab6455, type: 3}
+  m_Sprite: {fileID: 236066980, guid: 30cf76d207e848548bc6d2d0609d1147, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -223,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6ee585b5efe2f4aae2327891e3c129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  frogAnimator: {fileID: 32411589}
   tongue: {fileID: 1846110248}
   rayCaster: {fileID: 542884233}
   step: 2
@@ -263,6 +265,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &32411589
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32411582}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: db241a29aebce7a419cc61328e2aa051, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &33442866
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,7 +946,7 @@ Transform:
   m_GameObject: {fileID: 313351260}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -9.31, y: 11.030001, z: -20.999998}
+  m_LocalPosition: {x: 0.4, y: 11.000001, z: -26.099998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1112,7 +1135,7 @@ Transform:
   m_GameObject: {fileID: 542884229}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -9.31, y: 11.030001, z: -20.999998}
+  m_LocalPosition: {x: 0.4, y: 11.000001, z: -26.099998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1133,6 +1156,7 @@ MonoBehaviour:
   UIlayerMask:
     serializedVersion: 2
     m_Bits: 32
+  _cam: {fileID: 542884231}
 --- !u!114 &542884234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1464,7 +1488,6 @@ GameObject:
   m_Component:
   - component: {fileID: 976205487}
   - component: {fileID: 976205485}
-  - component: {fileID: 976205486}
   m_Layer: 0
   m_Name: CanvasCamera
   m_TagString: Untagged
@@ -1523,14 +1546,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &976205486
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 976205484}
-  m_Enabled: 1
 --- !u!4 &976205487
 Transform:
   m_ObjectHideFlags: 0
@@ -2683,6 +2698,7 @@ GameObject:
   - component: {fileID: 1833585773}
   - component: {fileID: 1833585774}
   - component: {fileID: 1833585775}
+  - component: {fileID: 1833585776}
   m_Layer: 0
   m_Name: Tongue
   m_TagString: Untagged
@@ -2774,7 +2790,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 2.01, y: 1.2500002, z: 0.20000005}
   m_Center: {x: 0, y: 0, z: 0}
@@ -2817,6 +2833,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
+--- !u!64 &1833585776
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833585770}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &1846110248
 GameObject:
   m_ObjectHideFlags: 0

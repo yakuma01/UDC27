@@ -7,6 +7,7 @@ namespace Player
 {
     public class Movement : MonoBehaviour
     {
+        [SerializeField] private Animator frogAnimator;
         public GameObject tongue;
         public RayCaster rayCaster;
         
@@ -41,7 +42,8 @@ namespace Player
             {
                 var targetPosition = _agent.transform.position;
                 targetPosition += Vector3.right * step;
-                _agent.SetDestination(targetPosition);
+                //_agent.SetDestination(targetPosition);
+                frogAnimator.SetTrigger("IsHoping");
                 StartCoroutine(BlockInput());
             }
             if (Input.GetKey(KeyCode.A)){
@@ -69,6 +71,7 @@ namespace Player
             tongue.SetActive(true);
             var nullCheck = new Vector3(420, 420, 420);
             var hitpos = rayCaster.GetRayCastPoint(nullCheck);
+            Debug.Log(hitpos);
             if (hitpos != nullCheck)
             {
                 hitpos.y = 0.01f;
@@ -79,7 +82,7 @@ namespace Player
                 var rotationVector = new Vector3(90, 0, mappedAngle);
                 tongue.transform.rotation = Quaternion.Euler(rotationVector);
             }
-
+            frogAnimator.SetTrigger("IsAttack");
             yield return new WaitForSeconds(_inputBlockTime);
             tongue.SetActive(false);
         }

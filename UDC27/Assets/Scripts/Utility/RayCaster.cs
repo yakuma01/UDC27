@@ -5,13 +5,14 @@ namespace Utility
     public class RayCaster : MonoBehaviour
     {
         [SerializeField] private LayerMask UIlayerMask;
+        [SerializeField] private Camera _cam;
         void FixedUpdate()
         {
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit))
             {
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
             }
             
         }
@@ -21,11 +22,11 @@ namespace Utility
             Vector3 mousePosition = Input.mousePosition;
 
             // Create a ray from the camera to the mouse click position
-            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+            Ray ray = _cam.ScreenPointToRay(mousePosition);
 
             // Perform a raycast on the plane
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, UIlayerMask))
+            if (Physics.Raycast(ray, out hit))
             {
                 var hitpos = hit.point;
                 return hitpos;
