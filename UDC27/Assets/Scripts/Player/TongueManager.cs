@@ -8,6 +8,8 @@ namespace Player
     {
         private void OnTriggerEnter(Collider other)
         {
+
+            Debug.Log("entered: " + other.transform.name);
             if (other.CompareTag("Bees"))
             {
                 var commonBee = other.GetComponent<CommonBee>();

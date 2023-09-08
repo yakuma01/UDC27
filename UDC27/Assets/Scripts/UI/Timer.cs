@@ -1,37 +1,37 @@
-using System.Collections;
-using UnityEngine.UI;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine;
 
-public class Timer : MonoBehaviour
+namespace UI
 {
-    private float timeLeft = 10.0f;
-    private bool isGameOver = false;
-    public TextMeshProUGUI startText; // used for showing countdown from 3, 2, 1 
+    public class Timer : MonoBehaviour
+    {
+        private float timeLeft = 60.0f;
+        private bool isGameOver = false;
+        public TextMeshProUGUI startText; // used for showing countdown from 3, 2, 1 
     
 
-    private void Update()
-    {
-        startText.text = (timeLeft).ToString("0");
-        if (timeLeft <= 0)
+        private void Update()
         {
-            if (!isGameOver)
+            startText.text = (timeLeft).ToString("0");
+            if (timeLeft <= 0)
             {
-                Debug.Log("Time is over");
-                isGameOver = true;
-                GameOver();
+                if (!isGameOver)
+                {
+                    Debug.Log("Time is over");
+                    isGameOver = true;
+                    GameOver();
+                }
+            }
+            else
+            {
+                timeLeft -= Time.deltaTime;
             }
         }
-        else
-        {
-            timeLeft -= Time.deltaTime;
-        }
-    }
 
-    private void GameOver()
-    {
-        PanelManager.Instance.HidePanel("TimerPanel");
-        PanelManager.Instance.ShowPanel("LevelTransitionPanel", PanelShowBehaviour.KEEP_PREVIOUS);
+        private void GameOver()
+        {
+            PanelManager.Instance.HidePanel("TimerPanel");
+            PanelManager.Instance.ShowPanel("LevelTransitionPanel", PanelShowBehaviour.KEEP_PREVIOUS);
+        }
     }
 }
