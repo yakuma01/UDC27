@@ -1180,6 +1180,7 @@ GameObject:
   - component: {fileID: 250984112}
   - component: {fileID: 250984115}
   - component: {fileID: 250984116}
+  - component: {fileID: 250984117}
   m_Layer: 0
   m_Name: Bee (2)
   m_TagString: Bees
@@ -1197,7 +1198,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -9.4, y: 0.03, z: 39.3}
-  m_LocalScale: {x: 0.3, y: 0.30000007, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1154392577}
@@ -1280,7 +1281,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 30a4ae5aa4b65844e9029e699015f620, type: 3}
+  m_Sprite: {fileID: 1317380868, guid: c5c3c49f5a89e0c4689b5734b3649c48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1324,6 +1325,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abcc05840d6e3d245a15dae214256e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &250984117
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250984110}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4b19164eb85026e4492eb81c5ec6416c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &282153303
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,6 +2287,7 @@ GameObject:
   - component: {fileID: 808745765}
   - component: {fileID: 808745768}
   - component: {fileID: 808745769}
+  - component: {fileID: 808745770}
   m_Layer: 0
   m_Name: Bee (3)
   m_TagString: Bees
@@ -2282,7 +2305,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.4525311, y: -0.5433375, z: 0.5433375, w: 0.4525311}
   m_LocalPosition: {x: 18.8, y: 0.03, z: 19.6}
-  m_LocalScale: {x: 0.30000007, y: 0.30000007, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1154392577}
@@ -2365,7 +2388,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 30a4ae5aa4b65844e9029e699015f620, type: 3}
+  m_Sprite: {fileID: 1317380868, guid: c5c3c49f5a89e0c4689b5734b3649c48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2409,6 +2432,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abcc05840d6e3d245a15dae214256e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &808745770
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808745763}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4b19164eb85026e4492eb81c5ec6416c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &889723199
 GameObject:
   m_ObjectHideFlags: 0
@@ -2881,6 +2925,7 @@ GameObject:
   - component: {fileID: 1039489883}
   - component: {fileID: 1039489884}
   - component: {fileID: 1039489885}
+  - component: {fileID: 1039489886}
   m_Layer: 0
   m_Name: Bee
   m_TagString: Bees
@@ -2929,7 +2974,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 30a4ae5aa4b65844e9029e699015f620, type: 3}
+  m_Sprite: {fileID: 1317380868, guid: c5c3c49f5a89e0c4689b5734b3649c48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2950,7 +2995,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -17.5, y: -0, z: 5.2}
-  m_LocalScale: {x: 0.3000001, y: 0.3000001, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1154392577}
@@ -3025,6 +3070,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abcc05840d6e3d245a15dae214256e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1039489886
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039489879}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4b19164eb85026e4492eb81c5ec6416c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1066035457
 GameObject:
   m_ObjectHideFlags: 0
@@ -3181,6 +3247,134 @@ Transform:
   - {fileID: 250984111}
   - {fileID: 808745764}
   - {fileID: 1556653675}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1164157553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1164157555}
+  - component: {fileID: 1164157554}
+  m_Layer: 0
+  m_Name: AudioSouce
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1164157554
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164157553}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1164157555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164157553}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.763811, y: -0.015659332, z: -15.688591}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1181373226
@@ -3422,6 +3616,7 @@ GameObject:
   - component: {fileID: 1462061857}
   - component: {fileID: 1462061856}
   - component: {fileID: 1462061855}
+  - component: {fileID: 1462061859}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3512,6 +3707,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1462061859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462061853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d17d6253462f94d868f03765e20f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  src: {fileID: 1164157554}
+  audioClips: []
 --- !u!1 &1485767396
 GameObject:
   m_ObjectHideFlags: 0
@@ -3631,6 +3840,7 @@ GameObject:
   - component: {fileID: 1496053286}
   - component: {fileID: 1496053289}
   - component: {fileID: 1496053290}
+  - component: {fileID: 1496053291}
   m_Layer: 0
   m_Name: Bee (1)
   m_TagString: Bees
@@ -3648,7 +3858,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -15.84, y: 0.03, z: 25.02}
-  m_LocalScale: {x: 0.3, y: 0.30000007, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1154392577}
@@ -3731,7 +3941,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 30a4ae5aa4b65844e9029e699015f620, type: 3}
+  m_Sprite: {fileID: 1317380868, guid: c5c3c49f5a89e0c4689b5734b3649c48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3775,6 +3985,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abcc05840d6e3d245a15dae214256e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1496053291
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496053284}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4b19164eb85026e4492eb81c5ec6416c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1556653674
 GameObject:
   m_ObjectHideFlags: 0
@@ -3789,6 +4020,7 @@ GameObject:
   - component: {fileID: 1556653676}
   - component: {fileID: 1556653679}
   - component: {fileID: 1556653680}
+  - component: {fileID: 1556653681}
   m_Layer: 0
   m_Name: Bee (4)
   m_TagString: Bees
@@ -3806,7 +4038,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.48941913, y: -0.51036155, z: 0.51036155, w: 0.48941913}
   m_LocalPosition: {x: 10.36, y: 0.03, z: 11.36}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1154392577}
@@ -3889,7 +4121,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 30a4ae5aa4b65844e9029e699015f620, type: 3}
+  m_Sprite: {fileID: 1317380868, guid: c5c3c49f5a89e0c4689b5734b3649c48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3933,6 +4165,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fdba2110810200419aa6f973ed6a95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1556653681
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556653674}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4b19164eb85026e4492eb81c5ec6416c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1691900767
 GameObject:
   m_ObjectHideFlags: 0
@@ -5014,3 +5267,4 @@ SceneRoots:
   - {fileID: 976205487}
   - {fileID: 1462061858}
   - {fileID: 1731603035}
+  - {fileID: 1164157555}
