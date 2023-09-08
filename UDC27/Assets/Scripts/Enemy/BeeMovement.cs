@@ -19,8 +19,8 @@ namespace Enemy
 
         private Vector3 _initialPosition;
 
-        private float _followRange = 5f;
-        private float _attackRange = 3f;
+        private float _followRange = 10f;
+        private float _attackRange = 5f;
         
         private enum BeeMotion
         {
@@ -77,7 +77,7 @@ namespace Enemy
         
         private void FollowBee()
         {
-            _agent.speed = 3.5f;
+            _agent.speed = 3f;
             _agent.acceleration = 8f;
             _agent.transform.rotation = _initialRotation;
             _agent.SetDestination(target.transform.position);
@@ -85,11 +85,10 @@ namespace Enemy
         
         private void AttackBee()
         {
-            _agent.speed = 3f;
+            _agent.speed = 3.5f;
             _agent.acceleration = 8f;
             _agent.transform.rotation = _initialRotation;
-            //_agent.SetDestination(target.transform.position);
-            _agent.SetDestination(_agent.transform.position);
+            _agent.SetDestination(target.transform.position);
         }
         
         private void ProtectBee()
@@ -117,6 +116,10 @@ namespace Enemy
                             _currentMotion = BeeMotion.Attack;
                             break;
                         case BeeMotion.Attack:
+                            if (dist < .5)
+                            {
+                                //_agent.
+                            }
                             break;
                     }
                 }
@@ -231,8 +234,12 @@ namespace Enemy
             {
                 queen.EnableCriticalStage();
             }
+
+            transform.localScale *= 2;
             
             yield return new WaitForSeconds(time);
+            
+            transform.localScale /= 2;
             
             if (common != null)
             {

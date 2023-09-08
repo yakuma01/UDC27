@@ -7,18 +7,19 @@ namespace Player
 {
     public class CustomMovement : MonoBehaviour
     {
-        public float moveSpeed = 2.0f;
+        private float moveSpeed = 3.0f;
         private bool _takeInput;
         public GameObject tongue;
         public RayCaster rayCaster;
 
         private bool facingRight = true;
-        private float _inputBlockTime = .6f;
+        private float _inputBlockTime = .5f;
         
         private Animator frogAnimator;
 
         private Vector3 colliderEnterPosition;
         private bool canMove = true;
+        
 
         private void Start()
         {
@@ -76,10 +77,6 @@ namespace Player
             var rotationVector = new Vector3(90, 0, mappedAngle);
 
             
-            
-
-            
-            
             frogAnimator.SetTrigger("IsAttack");
             
             yield return new WaitForSeconds(.3f);
@@ -104,6 +101,8 @@ namespace Player
             {
                 return;
             }
+
+            
             if (Input.GetKey(KeyCode.W))
             {
                 StartCoroutine(MoveCharacter(Vector3.forward));
@@ -138,6 +137,9 @@ namespace Player
 
         private void FaceLeft()
         {
+            var offset = -1;
+            transform.position -= Vector3.left*offset;
+            
             var dir = new Vector3(-90, -90, -90);
             transform.rotation = Quaternion.Euler(dir);
             facingRight = false;
@@ -145,13 +147,17 @@ namespace Player
         }
         private void FaceRight()
         {
+            
+            var offset = 1;
+            transform.position -= Vector3.left*offset;
+            
             var dir = new Vector3(90, 0, 0);
             transform.rotation = Quaternion.Euler(dir);
             facingRight = true;
             //transform.
         }
 
-        IEnumerator  MoveCharacter(Vector3 direction, float moveDuration = .6f)
+        IEnumerator  MoveCharacter(Vector3 direction, float moveDuration = .5f)
         {
             float startTime = Time.time;
             Vector3 startPosition = transform.position;
@@ -159,7 +165,7 @@ namespace Player
 
             frogAnimator.SetTrigger("IsHoping");
 
-            yield return new WaitForSeconds(.18f);
+            yield return new WaitForSeconds(.15f);
             
             while (Time.time - startTime < moveDuration)
             {
