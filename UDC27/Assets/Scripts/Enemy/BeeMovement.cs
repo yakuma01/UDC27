@@ -20,7 +20,7 @@ namespace Enemy
         private Vector3 _initialPosition;
 
         private float _followRange = 10f;
-        private float _attackRange = 5f;
+        private float _attackRange = 3f;
         
         private enum BeeMotion
         {
@@ -88,7 +88,10 @@ namespace Enemy
             _agent.speed = 3.5f;
             _agent.acceleration = 8f;
             _agent.transform.rotation = _initialRotation;
-            _agent.SetDestination(target.transform.position);
+
+            var pos = target.transform.position;
+            pos = pos + target.transform.forward*5;
+            _agent.SetDestination(pos);
         }
         
         private void ProtectBee()
