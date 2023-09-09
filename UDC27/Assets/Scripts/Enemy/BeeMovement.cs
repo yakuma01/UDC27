@@ -15,6 +15,8 @@ namespace Enemy
 
         private Quaternion _initialRotation;
 
+        private bool calmDownAttack = false;
+
         [SerializeField]private BeeMotion _currentMotion;
 
         private Vector3 _initialPosition;
@@ -90,7 +92,11 @@ namespace Enemy
             _agent.transform.rotation = _initialRotation;
 
             var pos = target.transform.position;
-            pos = pos + target.transform.forward*5;
+            pos += target.transform.forward;
+            /*if (calmDownAttack)
+            {
+                pos = _initialPosition;
+            }*/
             _agent.SetDestination(pos);
         }
         
@@ -110,6 +116,7 @@ namespace Enemy
             {
                 if (dist < _attackRange)
                 {
+                    //calmDownAttack = false;
                     switch (_currentMotion)
                     {
                         case BeeMotion.Idle:
@@ -119,9 +126,9 @@ namespace Enemy
                             _currentMotion = BeeMotion.Attack;
                             break;
                         case BeeMotion.Attack:
-                            if (dist < .5)
+                            if (dist < 1)
                             {
-                                //_agent.
+                                //calmDownAttack = true;
                             }
                             break;
                     }
@@ -132,8 +139,13 @@ namespace Enemy
                     {
                         case BeeMotion.Idle:
                         case BeeMotion.Protect:
-                        case BeeMotion.Attack:
                             _currentMotion = BeeMotion.Follow;
+                            break;
+                        case BeeMotion.Attack:
+                            if (dist > 7)
+                            {
+                                _currentMotion = BeeMotion.Follow;
+                            }
                             break;
                         case BeeMotion.Follow:
                             break;
