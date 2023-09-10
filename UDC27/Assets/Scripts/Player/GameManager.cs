@@ -92,7 +92,7 @@ public class GameManager :Singleton<GameManager>
         }
         var toShowHighScore = GameObject.Find("LevelTransitionPanel");
         Debug.Log(toShowHighScore.name);
-        //toShowHighScore.GetComponent<TextMeshProUGUI>().text = "HighScore : "+highScore+" .\n Score :   "+high;
+        toShowHighScore.GetComponentInChildren<TextMeshProUGUI>().text = "Congratulations \n HighScore: "+highScore+"\n Score: "+high;
         _timer.timeLeft = 0;
     }
 
