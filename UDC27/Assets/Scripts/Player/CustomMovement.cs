@@ -32,6 +32,7 @@ namespace Player
 
             
             frogAnimator.SetTrigger("IsAttack");
+            //sfx.frog scoop sound
             
             yield return new WaitForSeconds(.3f);
             

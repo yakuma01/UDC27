@@ -16,5 +16,14 @@ namespace UI
             startText.text = (timeLeft).ToString("0");
             timeLeft += Time.deltaTime;
         }
+        public void PauseTimer()
+        {
+            Time.timeScale = 0;
+        }
+
+        public void ResumeTimer()
+        {
+            Time.timeScale = 1;
+        }
     }
 }

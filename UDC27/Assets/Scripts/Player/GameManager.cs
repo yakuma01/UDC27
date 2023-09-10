@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UI;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager :Singleton<GameManager>
 {
     private Timer _timer;
     private bool IsTimerSet;
@@ -14,8 +14,7 @@ public class GameManager : MonoBehaviour
     private Dictionary<int, Vector3> initialLocations = new Dictionary<int, Vector3>();
     private static Dictionary<int, int> playerTimes = new Dictionary<int, int>();
     private GameObject playerFrog = null;
-    private List<Vector3> initialFrogPos = new List<Vector3>() { new Vector3(0f,0f,-19.9f),new Vector3(83f, 0f, -19.9f), new Vector3(183f, 0f, -19.9f), new Vector3(283f, 0f, -19.9f), new Vector3(400f, 0f, -19.9f), new Vector3(500f,0f, -19.9f)};
-
+    
     public static int levelTime;
     // Start is called before the first frame update
     void Start()
@@ -52,9 +51,6 @@ public class GameManager : MonoBehaviour
         if (FindObjectOfType<QueenBee>() == null && first)
         {
             GameOver();
-            
-            /*levelCompletes[levelIndex] = levelTime;
-            levelIndex++;*/
         }
     }
     private void GameOver()
@@ -63,8 +59,8 @@ public class GameManager : MonoBehaviour
         
         PanelManager.Instance.HidePanel("TimerPanel");
         PanelManager.Instance.ShowPanel("LevelTransitionPanel", PanelShowBehaviour.KEEP_PREVIOUS);
+        _timer.timeLeft = 0;
         
-        GoToNextMap();
         first = false;
     }
 
@@ -72,6 +68,15 @@ public class GameManager : MonoBehaviour
     {
         levelIndex++;
         playerFrog.transform.position = initialLocations[levelIndex];
+    }
+
+    public void GotoPreviousMap()
+    {
+        if (levelIndex > 0)
+        {
+            levelIndex--;
+            playerFrog.transform.position = initialLocations[levelIndex];
+        }
     }
 
 }
