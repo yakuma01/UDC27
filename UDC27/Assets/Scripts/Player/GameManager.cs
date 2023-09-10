@@ -1,6 +1,7 @@
 using Enemy;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UI;
 using UnityEngine;
 
@@ -44,7 +45,15 @@ public class GameManager :Singleton<GameManager>
         levelBees.Add(3,level3Bees);
         levelBees.Add(4,level4Bees);
         levelBees.Add(5,level5Bees);
-        
+
+
+        playerTimes.Add(0, 0);
+        playerTimes.Add(1, 0);
+        playerTimes.Add(2, 0);
+        playerTimes.Add(3, 0);
+        playerTimes.Add(4, 0);
+        playerTimes.Add(5, 0);
+
     }
 
     private bool first = true;
@@ -71,13 +80,20 @@ public class GameManager :Singleton<GameManager>
     }
     private void GameOver()
     {
-        playerTimes.Add(levelIndex, levelTime);
+        playerTimes[levelIndex] =  levelTime;
         
         PanelManager.Instance.HidePanel("TimerPanel");
         PanelManager.Instance.ShowPanel("LevelTransitionPanel", PanelShowBehaviour.KEEP_PREVIOUS);
+        int high = levelTime;
+        int highScore = playerTimes[levelIndex];
+        if(high > highScore)
+        {
+            playerTimes[levelIndex] = high;
+        }
+        var toShowHighScore = GameObject.Find("LevelTransitionPanel");
+        Debug.Log(toShowHighScore.name);
+        //toShowHighScore.GetComponent<TextMeshProUGUI>().text = "HighScore : "+highScore+" .\n Score :   "+high;
         _timer.timeLeft = 0;
-        
-
     }
 
     public void GoToNextMap()
