@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Player;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,7 +23,7 @@ namespace Enemy
         private Vector3 _initialPosition;
 
         private float _followRange = 10f;
-        private float _attackRange = 3f;
+        private float _attackRange = 4f;
         
         private enum BeeMotion
         {
@@ -40,8 +41,13 @@ namespace Enemy
             _initialRotation = _agent.transform.rotation;
             _initialPosition = _agent.transform.position;
             
+            IdleBeeSetup();
+            FollowBeeSetup();
+            ProtectBeeSetup();
+            AttackBeeSetup();
+            
             _currentMotion = BeeMotion.Idle;
-            StartCoroutine(IdleBeeMovement());
+            //StartCoroutine(IdleBeeMovement());
 
 
         }
@@ -53,13 +59,13 @@ namespace Enemy
             switch (_currentMotion)
             {
                 case BeeMotion.Idle:
-                    IdleBee();
+                    //IdleBee();
                     break;
                 case BeeMotion.Follow:
-                    FollowBee();
+                    FollowBeeSetup();
                     break;
                 case BeeMotion.Protect:
-                    ProtectBee();
+                    ProtectBeeSetup();
                     break;
                 case BeeMotion.Attack:
                     AttackBee();
@@ -69,7 +75,7 @@ namespace Enemy
             
         }
 
-        private void IdleBee()
+        private void IdleBeeSetup()
         {
             _agent.speed = 3.5f;
             _agent.acceleration = 8f;
@@ -77,35 +83,47 @@ namespace Enemy
             //_agent.SetDestination(_initialPosition);
         }
         
-        private void FollowBee()
+        private void FollowBeeSetup()
         {
             _agent.speed = 3f;
             _agent.acceleration = 8f;
             _agent.transform.rotation = _initialRotation;
-            _agent.SetDestination(target.transform.position);
+            //_agent.SetDestination(target.transform.position);
         }
         
-        private void AttackBee()
+        private void AttackBeeSetup()
         {
-            _agent.speed = 3.5f;
+            //_agent.speed = 3.5f;
             _agent.acceleration = 8f;
             _agent.transform.rotation = _initialRotation;
+        }
 
+        private void AttackBee()
+        {
             var pos = target.transform.position;
-            pos += target.transform.forward;
+            var offset = 2;
+            if (target.GetComponent<CustomMovement>().facingRight)
+            {
+                pos += target.transform.right * offset;
+            }
+            else
+            {
+                pos -= target.transform.right * offset;
+            }
+            
             /*if (calmDownAttack)
             {
                 pos = _initialPosition;
             }*/
             _agent.SetDestination(pos);
         }
-        
-        private void ProtectBee()
+
+        private void ProtectBeeSetup()
         {
             _agent.speed = 3.2f;
             _agent.acceleration = 8f;
             _agent.transform.rotation = _initialRotation;
-            _agent.SetDestination(queenBee.transform.position); 
+            //_agent.SetDestination(queenBee.transform.position); 
         }
         
         private void CheckForPlayer()
@@ -116,19 +134,26 @@ namespace Enemy
             {
                 if (dist < _attackRange)
                 {
+                    Debug.Log("attacking");
                     //calmDownAttack = false;
                     switch (_currentMotion)
                     {
                         case BeeMotion.Idle:
                         case BeeMotion.Protect:
                         case BeeMotion.Follow:
-                            StartCoroutine(HandleCriticalTime(1));
                             _currentMotion = BeeMotion.Attack;
+                            StartCoroutine(HandleCriticalTime(1));
+                            _agent.SetDestination(target.transform.position);
                             break;
                         case BeeMotion.Attack:
                             if (dist < 1)
                             {
-                                //calmDownAttack = true;
+                                Debug.Log("its now");
+                                _agent.SetDestination(_initialPosition);
+                            }
+                            else
+                            {
+                                _agent.SetDestination(target.transform.position);
                             }
                             break;
                     }
@@ -139,15 +164,27 @@ namespace Enemy
                     {
                         case BeeMotion.Idle:
                         case BeeMotion.Protect:
+                        case BeeMotion.Follow:
                             _currentMotion = BeeMotion.Follow;
+                            var pos = target.transform.position;
+                            var offset = 2;
+                            if (target.GetComponent<CustomMovement>().facingRight)
+                            {
+                                pos -= target.transform.right * offset;
+                            }
+                            else
+                            {
+                                pos += target.transform.right * offset;
+                            }
+                            _agent.SetDestination(pos);
                             break;
                         case BeeMotion.Attack:
                             if (dist > 7)
                             {
                                 _currentMotion = BeeMotion.Follow;
+                                _agent.SetDestination(target.transform.position);
                             }
-                            break;
-                        case BeeMotion.Follow:
+                            _agent.SetDestination(_initialPosition);
                             break;
                         
                     }
@@ -159,7 +196,7 @@ namespace Enemy
                 if (_currentMotion != BeeMotion.Idle)
                 {
                     _currentMotion = BeeMotion.Idle;
-                    StartCoroutine(IdleBeeMovement());
+                    //StartCoroutine(IdleBeeMovement());
 
                 }
                 
@@ -235,8 +272,9 @@ namespace Enemy
         
         private IEnumerator HandleCriticalTime(float time)
         {
-            
-            //yield return new WaitForSeconds(1);
+            _agent.speed = 0;
+            yield return new WaitForSeconds(1);
+            _agent.speed = 3.5f;
             
             var common = _agent.GetComponent<CommonBee>();
             var queen = _agent.GetComponent<QueenBee>();
@@ -250,11 +288,11 @@ namespace Enemy
                 queen.EnableCriticalStage();
             }
 
-            transform.localScale *= 2;
+            transform.localScale *= 1.4f;
             
             yield return new WaitForSeconds(time);
             
-            transform.localScale /= 2;
+            transform.localScale /= 1.4f;
             
             if (common != null)
             {

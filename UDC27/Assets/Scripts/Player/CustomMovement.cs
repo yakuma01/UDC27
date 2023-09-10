@@ -12,7 +12,7 @@ namespace Player
         public GameObject tongue;
         public RayCaster rayCaster;
 
-        private bool facingRight = true;
+        public bool facingRight = true;
         private float _inputBlockTime = .5f;
         
         private Animator frogAnimator;
@@ -30,59 +30,12 @@ namespace Player
         private IEnumerator ShootTongue()
         {
 
-            var nullCheck = new Vector3(420, 420, 420);
-            var hitpos = rayCaster.GetRayCastPoint(nullCheck);
-
-            if (hitpos == nullCheck)
-            {
-                yield break;
-            }
-
-            hitpos.y = 0.01f;
-            var tp = tongue.transform.position;
-            Vector2 Point_1 = new Vector2(tp.x, tp.z);
-            Vector2 Point_2 = new Vector2(hitpos.x, hitpos.z);
-            float mappedAngle = Mathf.Atan2(Point_2.y - Point_1.y, Point_2.x - Point_1.x) * Mathf.Rad2Deg;
-            
-            Debug.Log(mappedAngle);
-            
-            if (facingRight)
-            {
-
-                if (mappedAngle > 60)
-                {
-                    mappedAngle = 60;
-                }
-                else if (mappedAngle < -60)
-                {
-                    mappedAngle = -60;
-                }
-                
-            }
-            else
-            {
-                /*if (mappedAngle < 120)
-                {
-                    mappedAngle = 120;
-                }
-                else if (mappedAngle > -120 )
-                {
-                    mappedAngle = -120;
-                }*/
-                
-                //Todo: Handle tongue on left side
-                
-            }
-            
-            var rotationVector = new Vector3(90, 0, mappedAngle);
-
             
             frogAnimator.SetTrigger("IsAttack");
             
             yield return new WaitForSeconds(.3f);
             
             tongue.SetActive(true);
-            tongue.transform.rotation = Quaternion.Euler(rotationVector);
             
             yield return new WaitForSeconds(.3f);
             
