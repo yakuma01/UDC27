@@ -163,6 +163,7 @@ namespace Enemy
                             _currentMotion = BeeMotion.Follow;
                             
                             _agent.SetDestination(GetOffsetPosition());
+                            
                             break;
                         case BeeMotion.Attack:
                             if (dist > 5)
