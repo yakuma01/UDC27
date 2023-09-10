@@ -7,7 +7,7 @@ namespace Enemy
     {
         private NavMeshAgent _agent;
 
-        private int _hitPoint = 6;
+        public int _hitPoint = 6;
 
         private bool _inCriticalStage = false;
         // Start is called before the first frame update
@@ -26,7 +26,10 @@ namespace Enemy
             {
                 OneHitBee();
             }
-            _hitPoint--;
+            else
+            {
+                _hitPoint--;
+            }
         }
 
         private void OneHitBee()

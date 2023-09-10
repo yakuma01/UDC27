@@ -16,9 +16,6 @@ namespace Enemy
         {
             _agent = GetComponent<NavMeshAgent>();
         
-            _agent.speed = 5;
-            _agent.acceleration = 10;
-        
         }
 
         public void HitBee()

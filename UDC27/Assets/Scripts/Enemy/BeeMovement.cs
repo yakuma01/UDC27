@@ -41,11 +41,6 @@ namespace Enemy
             _initialRotation = _agent.transform.rotation;
             _initialPosition = _agent.transform.position;
             
-            IdleBeeSetup();
-            FollowBeeSetup();
-            ProtectBeeSetup();
-            AttackBeeSetup();
-            
             _currentMotion = BeeMotion.Idle;
             //StartCoroutine(IdleBeeMovement());
 
@@ -85,7 +80,7 @@ namespace Enemy
         
         private void FollowBeeSetup()
         {
-            _agent.speed = 3f;
+            //_agent.speed = 3f;
             _agent.acceleration = 8f;
             _agent.transform.rotation = _initialRotation;
             //_agent.SetDestination(target.transform.position);
@@ -115,12 +110,12 @@ namespace Enemy
             {
                 pos = _initialPosition;
             }*/
-            _agent.SetDestination(pos);
+            //_agent.SetDestination(pos);
         }
 
         private void ProtectBeeSetup()
         {
-            _agent.speed = 3.2f;
+            //_agent.speed = 3.2f;
             _agent.acceleration = 8f;
             _agent.transform.rotation = _initialRotation;
             //_agent.SetDestination(queenBee.transform.position); 
@@ -141,19 +136,19 @@ namespace Enemy
                         case BeeMotion.Idle:
                         case BeeMotion.Protect:
                         case BeeMotion.Follow:
-                            _currentMotion = BeeMotion.Attack;
                             StartCoroutine(HandleCriticalTime(1));
-                            _agent.SetDestination(target.transform.position);
+                            _currentMotion = BeeMotion.Attack;
                             break;
                         case BeeMotion.Attack:
-                            if (dist < 1)
+                            if (dist < 1.5 || calmDownAttack)
                             {
                                 Debug.Log("its now");
-                                _agent.SetDestination(_initialPosition);
+                                _agent.SetDestination(GetOffsetPosition(5));
+                                calmDownAttack = true;
                             }
                             else
                             {
-                                _agent.SetDestination(target.transform.position);
+                               // _agent.SetDestination(target.transform.position);
                             }
                             break;
                     }
@@ -166,23 +161,15 @@ namespace Enemy
                         case BeeMotion.Protect:
                         case BeeMotion.Follow:
                             _currentMotion = BeeMotion.Follow;
-                            var pos = target.transform.position;
-                            var offset = 2;
-                            if (target.GetComponent<CustomMovement>().facingRight)
-                            {
-                                pos -= target.transform.right * offset;
-                            }
-                            else
-                            {
-                                pos += target.transform.right * offset;
-                            }
-                            _agent.SetDestination(pos);
+                            
+                            _agent.SetDestination(GetOffsetPosition());
                             break;
                         case BeeMotion.Attack:
-                            if (dist > 7)
+                            if (dist > 5)
                             {
                                 _currentMotion = BeeMotion.Follow;
                                 _agent.SetDestination(target.transform.position);
+                                calmDownAttack = false;
                             }
                             _agent.SetDestination(_initialPosition);
                             break;
@@ -203,6 +190,21 @@ namespace Enemy
             }
         }
 
+        private Vector3 GetOffsetPosition(int offset = 2)
+        {
+            var pos = target.transform.position;
+            if (target.GetComponent<CustomMovement>().facingRight)
+            {
+                pos -= target.transform.right * offset;
+            }
+            else
+            {
+                pos += target.transform.right * offset;
+            }
+
+            return pos;
+
+        }
         private IEnumerator IdleBeeMovement()
         {
             Vector3 below = transform.position + transform.up;
@@ -272,9 +274,16 @@ namespace Enemy
         
         private IEnumerator HandleCriticalTime(float time)
         {
-            _agent.speed = 0;
+            _agent.ResetPath(); 
+            
+            Debug.Log("stopforattack");
             yield return new WaitForSeconds(1);
-            _agent.speed = 3.5f;
+            Debug.Log("startforattack");
+
+            _agent.SetDestination(target.transform.position);
+
+            
+            //_agent.speed = 3.5f;
             
             var common = _agent.GetComponent<CommonBee>();
             var queen = _agent.GetComponent<QueenBee>();
