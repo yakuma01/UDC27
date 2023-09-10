@@ -17,13 +17,30 @@ public class HidePanelButton : MonoBehaviour
         // Cache the manager
         _panelManager = PanelManager.Instance;
         _gameManager = GameManager.Instance;
-        _timer = FindObjectOfType<Timer>(); 
+    }
+
+    private void Update()
+    {
+        var timerE = FindObjectOfType<Timer>();
+        if (timerE != null)
+        {
+            _timer = timerE;
+        }
     }
 
     public void DoHidePanel()
     {
         // Hide the last panel
-        _panelManager.HideLastPanel();
+        var lastPanel = _panelManager.GetLastPanel();
+        if (lastPanel.PanelId == "SettingsOptionsPanel")
+        {
+            _panelManager.HideLastPanel();
+            _panelManager.ShowPanel("SettingsPanel");
+        }
+        else
+        {
+            _panelManager.HideLastPanel();
+        }
     }
 
     public void DoHidePanelFromStart()

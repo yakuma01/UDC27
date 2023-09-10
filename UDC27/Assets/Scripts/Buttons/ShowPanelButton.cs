@@ -23,11 +23,22 @@ public class ShowPanelButton : MonoBehaviour
     {
         // Cache the manager
         _panelManager = PanelManager.Instance;
-        _timer = FindObjectOfType<Timer>();
+    }
+    private void Update()
+    {
+        var timerE = FindObjectOfType<Timer>();
+        if (timerE != null)
+        {
+            _timer = timerE;
+        }
     }
     public void DoShowPanel()
     {
         // Show the panel
+        if(PanelId == "SettingsOptionsPanel")
+        {
+            _panelManager.HidePanel("SettingsPanel");
+        }
         _panelManager.ShowPanel(PanelId, Behaviour);
     }
 
@@ -35,6 +46,4 @@ public class ShowPanelButton : MonoBehaviour
     {
         _timer.PauseTimer();
     }
-
-    
 }

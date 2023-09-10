@@ -98,7 +98,7 @@ public class PanelManager : Singleton<PanelManager>
     /// Returns the last panel in the queue
     /// </summary>
     /// <returns>The last panel in the queue</returns>
-    PanelInstanceModel GetLastPanel()
+    public PanelInstanceModel GetLastPanel()
     {
         return _panelInstanceModels[_panelInstanceModels.Count - 1];
     }

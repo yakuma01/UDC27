@@ -24,6 +24,8 @@ namespace Enemy
 
         private float _followRange = 10f;
         private float _attackRange = 4f;
+
+        private SfxPlayer sfxPlayer;
         
         private enum BeeMotion
         {
@@ -42,6 +44,7 @@ namespace Enemy
             _initialPosition = _agent.transform.position;
             
             _currentMotion = BeeMotion.Idle;
+            sfxPlayer = SfxPlayer.Instance;
             //StartCoroutine(IdleBeeMovement());
 
 
@@ -163,7 +166,8 @@ namespace Enemy
                             _currentMotion = BeeMotion.Follow;
                             
                             _agent.SetDestination(GetOffsetPosition());
-                            
+                            //bee buzzing sound
+                            sfxPlayer.PlayAudioClip(sfxPlayer.audioClips[1]);
                             break;
                         case BeeMotion.Attack:
                             if (dist > 5)

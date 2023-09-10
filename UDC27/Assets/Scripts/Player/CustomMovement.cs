@@ -16,7 +16,7 @@ namespace Player
         private float _inputBlockTime = .5f;
         
         private Animator frogAnimator;
-
+        private SfxPlayer sfxPlayer;
         private Vector3 colliderEnterPosition;
         private bool canMove = true;
         
@@ -25,6 +25,7 @@ namespace Player
         {
             _takeInput = true;
             frogAnimator = GetComponent<Animator>();
+            sfxPlayer = SfxPlayer.Instance;
         }
 
         private IEnumerator ShootTongue()
@@ -33,7 +34,7 @@ namespace Player
             
             frogAnimator.SetTrigger("IsAttack");
             //sfx.frog scoop sound
-            
+            sfxPlayer.PlayAudioClip(sfxPlayer.audioClips[0]);
             yield return new WaitForSeconds(.3f);
             
             tongue.SetActive(true);
